@@ -12,13 +12,14 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/5
 data = requests.get(url, headers=headers)
 soup = BeautifulSoup(data.text, 'html.parser')
 
-#한 줄 씩 들고옴
-tr = soup.select_one('.lst50')
+# selct_one: 한 줄 씩 들고옴 / select: 해당 태그인 것들을 전부 들고옴
+trs = soup.select('.lst50')
 
-rank = tr.select_one('.rank').text
-title = tr.select_one('.rank01 > span > a').text # <rank01><span><a>text</a></span></rank01>
-artist = tr.select_one('.rank02 > a').text
-image = tr.select_one('img')['src'] # <img src="이미지주소"> #img 주소에 src 속성
+for tr in trs:
+    rank = tr.select_one('.rank').text
+    title = tr.select_one('.rank01 > span > a').text # <rank01><span><a>text</a></span></rank01>
+    artist = tr.select_one('.rank02 > a').text
+    image = tr.select_one('img')['src'] # <img src="이미지주소"> #img 주소에 src 속성
 
-print(rank,title, artist, image)
+    print(rank,title, artist, image)
 
