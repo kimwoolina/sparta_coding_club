@@ -13,7 +13,9 @@ data = requests.get(url, headers=headers)
 soup = BeautifulSoup(data.text, 'html.parser')
 
 # selct_one: 한 줄 씩 들고옴 / select: 해당 태그인 것들을 전부 들고옴
-trs = soup.select('.lst50')
+# trs = soup.select('.lst50')
+# 50위까지만 출력되는 이유 > 51위부터는 태그가 list100으로 바뀜
+trs = soup.select('table > tbody > tr')
 
 for tr in trs:
     rank = tr.select_one('.rank').text
